@@ -38,7 +38,7 @@ public class Status implements Command {
 
 
 
-        Map<String, String> committedFiles = Map.of();
+        Map<String, String> committedFiles = java.util.Collections.emptyMap();
         if (!headCommit.isEmpty()) {
             File commitFile = new File(Repository.COMMITS, headCommit);
             if (commitFile.exists()) {

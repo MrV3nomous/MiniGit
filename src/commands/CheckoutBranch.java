@@ -44,9 +44,11 @@ public class CheckoutBranch implements Command {
         for (Map.Entry<String, String> entry : commit.files.entrySet()) {
             Blob blob = ObjectStore.read(entry.getValue());
             if (blob != null) {
-                File target = new File(entry.getKey());
-                target.getParentFile().mkdirs();
-                FileUtil.write(target, blob.content);
+                File targetFile = new File(entry.getKey());
+                if (targetFile.getParentFile() != null) {
+                    targetFile.getParentFile().mkdirs();
+                }
+                FileUtil.write(targetFile, blob.content);
             }
         }
 

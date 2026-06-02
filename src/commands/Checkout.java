@@ -48,7 +48,9 @@ public class Checkout implements Command {
             Blob blob = ObjectStore.read(entry.getValue());
             if (blob != null) {
                 File targetFile = new File(entry.getKey());
-                targetFile.getParentFile().mkdirs();
+                if (targetFile.getParentFile() != null) {
+                    targetFile.getParentFile().mkdirs();
+                }
                 FileUtil.write(targetFile, blob.content);
                 index.add(entry.getKey(), entry.getValue());
             }
